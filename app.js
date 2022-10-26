@@ -40,7 +40,7 @@ app.use(xss());
 
 
 
-// extra packages
+// extra packages.
 // app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use('/api/v1/auth', authRouter)
