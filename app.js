@@ -46,17 +46,17 @@ app.use(xss());
 
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/recipes', auth, recipes)
-app.use(notFoundMiddleware);
-app.use(errorHandlerMiddleware);
 
 app.get('/', (req, res) => {
   res.status(200).send('testing route is good')
 })
 
-app.get('/checkUser', auth, (req, res) => {
-  res.status(200).send(`user ${req.user.name} is logged in`)
+app.get('/checkUser', auth,  (req, res) => {
+  res.status(200).send(`user ${req.user.name} is logged in....`)
 })
 
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 3002;
 const connectionString = process.env.MONGO_URI;
