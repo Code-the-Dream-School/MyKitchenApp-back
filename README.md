@@ -8,7 +8,18 @@ JWT_SECRET
 JWT_LIFETIME  
 
 ## API so far
-"/" check route  
-"/checkUser"  checks if the user is logged in  
-"/api/v1/auth/register"  registers the user- body contains name, password (minimum 6 characters), email (syntactically valid email)  
-"/api/v1/auth/login"  logs user in- body requires email and password  
+GET "/" - check route  
+
+GET "/checkUser" - checks if the user is logged in 
+
+POST "/api/v1/auth/register" - registers the user- body contains name, password (minimum 6 characters), email (syntactically valid email)  
+
+POST "/api/v1/auth/login" - logs user in- body requires email and password  
+
+GET "/api/v1/recipes" - gets recipe by query / requires authentication
+  this is the 'search recipe' endpoint in the spoonacular docs  
+  
+GET "/api/v1/recipes/:id" - gets individual recipe by recipe id 
+  this is the 'get recipe information' endpoint in the spoonacular docs
+
+
