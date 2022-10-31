@@ -9,7 +9,6 @@ const axios = require('axios')
 const getRecipes = async (req, res) => {
   req.query.apiKey = apiKey;
   const results = await axios.get("https://api.spoonacular.com/recipes/complexSearch", {params: req.query});
-  console.log(results);
   res.status(StatusCodes.OK).send(results.data)
 }
 const getRecipe = async (req, res) => {
@@ -33,13 +32,11 @@ const deleteFavorite = async (req, res) => {
 
 const getRecipeList = async (req, res) => {
   const favoritesList = await Favorite.find({userId: req.user.userId})
-  console.log(favoritesList);
   res.status(StatusCodes.OK).json(favoritesList) ;
 }
 
 const saveFavorite = async (req, res) => {
   req.body.userId = req.user.userId
-  console.log(req.user.userId)
   const list = await Favorite.find({userId: req.user.userId, recipeId: req.body.recipeId});
   if (list.length > 0) {
     return res.status(StatusCodes.OK).json({message: 'Recipe already saved!'})
