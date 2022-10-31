@@ -19,9 +19,19 @@ const getRecipe = async (req, res) => {
     throw new NotFoundError(`no recipe with id ${req.params.id}`)
   }
   res.status(StatusCodes.OK).send(results.data) ;
-}
+} //get id, title, image, readyInMinutes, servings, sourceUrl, summary, analyzedInstructions, extendedIngredients (name, amount, unit, image)
+
+const deleteFavorite = async (req, res) => {
+  const {id} = req.params
+  const {user} = req
+  const favorite = await Favorite.findOneAndDelete({user: user._id, recipeId: id})
+  if(!favorite) { 
+    throw new NotFoundError(`no favorite with id ${id}`)  
+  } 
+  res.status(StatusCodes.OK).json({message: 'favorite deleted'})  
+} 
+
 const getRecipeList = async (req, res) => {
-  console.log('got here....')
   const favoritesList = await Favorite.find({userId: req.user.userId})
   console.log(favoritesList);
   res.status(StatusCodes.OK).json(favoritesList) ;
@@ -44,5 +54,6 @@ module.exports = {
   getRecipe,
   getRecipes,
   getRecipeList,
-  saveFavorite
+  saveFavorite,
+  deleteFavorite
 }

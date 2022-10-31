@@ -6,11 +6,12 @@ const {
   getRecipes,
   getRecipe,
   getRecipeList,
-  saveFavorite
+  saveFavorite,
+  deleteFavorite
  } = require('../controllers/recipe')
 
  router.route('/').get(getRecipes)
  router.route('/list').get(getRecipeList).post(saveFavorite)
- router.route('/:id').get(getRecipe)
+ router.route('/:id').get(getRecipe).delete(deleteFavorite)
 
  module.exports = router
