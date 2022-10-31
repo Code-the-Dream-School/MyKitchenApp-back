@@ -25,11 +25,6 @@ const FavoriteSchema = new mongoose.Schema({
     imageType: {
       type: String,
     
-    },
-    createdBy:{
-        type:mongoose.Types.ObjectId,
-        ref:'User',
-        required:[true, 'please provide user']
-      }
+    }
   },{timestamps:true})    
   module.exports = mongoose.model('Favorite', FavoriteSchema) 
