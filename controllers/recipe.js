@@ -17,9 +17,50 @@ const getRecipe = async (req, res) => {
   if (!req.params.id) {
     throw new NotFoundError(`no recipe with id ${req.params.id}`)
   }
-  res.status(StatusCodes.OK).send(results.data) ;
-} //get id, title, image, readyInMinutes, servings, sourceUrl, summary, analyzedInstructions, extendedIngredients (name, amount, unit, image)
+  // let ingredients = results.data.extendedIngredients.map(ingredient => ingredient)
+  let instructions = results.data.analyzedInstructions[0].steps.map(step => step.step)
+  let recipe = {
+    id: results.data.id,
+    title: results.data.title,
+    image: results.data.image,
+    // ingredients: ingredients,
+    instructions: instructions,
+    readyInMinutes: results.data.readyInMinutes,
+    servings: results.data.servings,
+    sourceUrl: results.data.sourceUrl,
+    summary: results.data.summary,
+    diets: results.data.diets,
+    cuisines: results.data.cuisines,
+    originalId: results.data.id,
+    creditText: results.data.creditsText,
+    sourceName: results.data.sourceName,
+    imageType: results.data.imageType,
 
+  }
+  res.status(StatusCodes.OK).json(recipe)
+}
+
+//   id = req.params.id
+//   image = results.data.image
+//   title = results.data.title
+//   imageType = results.data.imageType
+//   servings = results.data.servings
+//   readyInMinutes = results.data.readyInMinutes
+//   extendedIngredients = results.data.extendedIngredients
+//   instructions = results.data.instructions
+//   summary = results.data.summary
+//   originalId = results.data.id
+//   name = results.data.name
+//   sourceUrl = results.data.sourceUrl
+//   creditText = results.data.creditText
+
+//   res.status(StatusCodes.OK).json({id, image, title, imageType, servings, readyInMinutes, extendedIngredients, instructions})
+//   //res.status(StatusCodes.OK).send(results.data) ;
+// }  
+
+
+
+// check if user: user._id or if user: user.id??.......................
 const deleteFavorite = async (req, res) => {
   const {id} = req.params
   const {user} = req
@@ -45,6 +86,18 @@ const saveFavorite = async (req, res) => {
   res.status(StatusCodes.OK).json({message: 'Favorite recipe saved'}) ;
 
 }
+// get only id, title, image, readyInMinutes, servings, sourceUrl, summary, extendedIngredients (name, amount, unit, image),instructions, imageType creditText from /api/v1/recipes/:id.  
+
+
+
+
+
+
+
+
+
+
+
 
 
 module.exports = {
