@@ -35,7 +35,7 @@ app.use(rateLimiter({
   max: 100, // limit each IP to 100 requests per windowMs
 }));
 app.use(express.json());
-app.use(helmet());
+//app.use(helmet());
 app.use(cors());
 app.use(xss());
 
@@ -43,16 +43,26 @@ app.use(xss());
 
 // extra packages.
 // app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
-
+app.set('view engine', 'ejs')
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/recipes', auth, recipes)
 
+app.post('/googleTicket', (req, res) => {
+  res.redirect('/')
+})
+app.get('/googleTicket', (req, res) => {
+  res.render('index', {client_id: process.env.CLIENT_ID})
+})
+
 app.get('/', (req, res) => {
-  res.status(200).send('testing route is good')
+  res.status(200).json({message: 'testing route is good'})
 })
 
 app.get('/checkUser', auth,  (req, res) => {
-  res.status(200).send(`user ${req.user.name} is logged in....`)
+  res.status(200).json({message: `user ${req.user.name} is logged in....`})
+})
+app.get('/testGoogle', (req, res) => {
+  res.render('testGoogle')
 })
 
 app.use(notFoundMiddleware);
