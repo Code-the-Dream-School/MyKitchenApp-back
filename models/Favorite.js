@@ -22,9 +22,6 @@ const FavoriteSchema = new mongoose.Schema({
         type: String,
             
     },
-    imageType: {
-      type: String,
-    
-    }
+  
   },{timestamps:true})    
   module.exports = mongoose.model('Favorite', FavoriteSchema) 
