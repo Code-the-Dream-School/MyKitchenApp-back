@@ -17,48 +17,24 @@ const getRecipe = async (req, res) => {
   if (!req.params.id) {
     throw new NotFoundError(`no recipe with id ${req.params.id}`)
   }
-  // let ingredients = results.data.extendedIngredients.map(ingredient => ingredient)
+  let ingredients = results.data.extendedIngredients.map(ingredient => ingredient.original)
   let instructions = results.data.analyzedInstructions[0].steps.map(step => step.step)
   let recipe = {
     id: results.data.id,
     title: results.data.title,
-    image: results.data.image,
-    // ingredients: ingredients,
-    instructions: instructions,
-    readyInMinutes: results.data.readyInMinutes,
     servings: results.data.servings,
-    sourceUrl: results.data.sourceUrl,
-    summary: results.data.summary,
     diets: results.data.diets,
     cuisines: results.data.cuisines,
-    originalId: results.data.id,
+    sourceUrl: results.data.sourceUrl,
+    image: results.data.image,
+    ingredients: ingredients,
+    instructions: instructions,
+    readyInMinutes: results.data.readyInMinutes,
+    summary: results.data.summary,
     creditText: results.data.creditsText,
-    sourceName: results.data.sourceName,
-    imageType: results.data.imageType,
-
   }
   res.status(StatusCodes.OK).json(recipe)
 }
-
-//   id = req.params.id
-//   image = results.data.image
-//   title = results.data.title
-//   imageType = results.data.imageType
-//   servings = results.data.servings
-//   readyInMinutes = results.data.readyInMinutes
-//   extendedIngredients = results.data.extendedIngredients
-//   instructions = results.data.instructions
-//   summary = results.data.summary
-//   originalId = results.data.id
-//   name = results.data.name
-//   sourceUrl = results.data.sourceUrl
-//   creditText = results.data.creditText
-
-//   res.status(StatusCodes.OK).json({id, image, title, imageType, servings, readyInMinutes, extendedIngredients, instructions})
-//   //res.status(StatusCodes.OK).send(results.data) ;
-// }  
-
-
 
 // check if user: user._id or if user: user.id??.......................
 const deleteFavorite = async (req, res) => {
