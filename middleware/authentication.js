@@ -17,15 +17,12 @@ async function verify(token) {
 const auth = async (req, res, next) => {
   //check header
   const authHeader = req.headers.authorization
-  console.log(authHeader, 'authHeader...')
   if(!authHeader || !authHeader.startsWith('Bearer ')) {
     throw new UnauthenticatedError('authentication invalid')
   }
   const token = authHeader.split(' ')[1]
   const tokenContent = jwt.decode(token)
-  console.log(tokenContent)
   if (tokenContent.iss && tokenContent.iss === "https://accounts.google.com") {
-    console.log('calling google to verify token...')
     try {
      await verify(token)
       let googleUser = await GoogleUser.findOne({subject: tokenContent.sub})

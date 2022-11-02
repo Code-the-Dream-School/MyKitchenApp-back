@@ -10,10 +10,8 @@
   <script>
     function setAuthHeader() {
       const token = localStorage.getItem("token");
-      console.log(token, 'token...')
       fetch('/checkUser', {headers: { Authorization: "Bearer " + token}})
       .then((response) => {
-        console.log(response.status)
         response.json()
         .then((data) => {
           console.log(data)
