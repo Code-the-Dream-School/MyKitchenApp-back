@@ -1,8 +1,8 @@
 {
-  "name": "Grocery-App",
+  "name": "My Kitchen",
   "version": "1.0.0",
-  "description": "## Back End Repository",
-  "main": "index.js",
+  "description": "A Recipe Finder using the Spoonacular API",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",

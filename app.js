@@ -36,7 +36,11 @@ app.use(rateLimiter({
 }));
 app.use(express.json());
 //app.use(helmet());
-app.use(cors());
+const corsOptions = {  // we only use CORS for development testing
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions));
 app.use(xss());
 
 
@@ -47,14 +51,17 @@ app.set('view engine', 'ejs')
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/recipes', auth, recipes)
 
-app.post('/googleTicket', (req, res) => {
-  res.redirect('/')
-})
+//app.post('/googleTicket', (req, res) => {
+//  res.redirect('/')
+//})
+
+app.use(express.static('./MyKitchenApp-front/build'))
+
 app.get('/googleTicket', (req, res) => {
   res.render('index', {client_id: process.env.CLIENT_ID})
 })
 
-app.get('/', (req, res) => {
+app.get('/routeTest', (req, res) => {
   res.status(200).json({message: 'testing route is good'})
 })
 
