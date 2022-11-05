@@ -1,5 +1,5 @@
 {
-  "name": "My Kitchen",
+  "name": "my-kitchen",
   "version": "1.0.0",
   "description": "A Recipe Finder using the Spoonacular API",
   "main": "app.js",
