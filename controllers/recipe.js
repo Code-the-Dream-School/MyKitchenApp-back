@@ -62,7 +62,14 @@ const saveFavorite = async (req, res) => {
   res.status(StatusCodes.OK).json({message: 'Favorite recipe saved'}) ;
 
 }
-// get only id, title, image, readyInMinutes, servings, sourceUrl, summary, extendedIngredients (name, amount, unit, image),instructions, imageType creditText from /api/v1/recipes/:id.  
+//get random recipe from api route https://api.spoonacular.com/recipes/random
+
+const getRandomRecipes = async (req, res) => { 
+  req.query.apiKey = apiKey;
+  const results = await axios.get(`https://api.spoonacular.com/recipes/random`, {params: req.query});
+  res.status(StatusCodes.OK).send(results.data)
+}
+
 
 
 
@@ -81,5 +88,6 @@ module.exports = {
   getRecipes,
   getRecipeList,
   saveFavorite,
-  deleteFavorite
+  deleteFavorite,
+  getRandomRecipes,
 }

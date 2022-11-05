@@ -7,10 +7,12 @@ const {
   getRecipe,
   getRecipeList,
   saveFavorite,
-  deleteFavorite
+  deleteFavorite,
+  getRandomRecipes,
  } = require('../controllers/recipe')
 
  router.route('/').get(getRecipes)
+ router.route('/random').get(getRandomRecipes)
  router.route('/list').get(getRecipeList).post(saveFavorite)
  router.route('/:id').get(getRecipe).delete(deleteFavorite)
 
