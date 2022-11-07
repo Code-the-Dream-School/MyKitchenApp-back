@@ -33,7 +33,7 @@ const auth = async (req, res, next) => {
           subject: tokenContent.sub,      
         })
       }
-        req.user = {name: tokenContent.name, userId: googleUser.id}
+        req.user = {name: tokenContent.name, userId: googleUser.id, type: 'Google'}
       return next()
     } catch (error) {
       console.log(error)
@@ -43,7 +43,7 @@ const auth = async (req, res, next) => {
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET)
     //attach the user to the routes
-    req.user = {userId:payload.userId, name:payload.name}
+    req.user = {userId:payload.userId, name:payload.name, type: 'Local'}
     next()
   } catch (error) {
     throw new UnauthenticatedError('authentication invalid')

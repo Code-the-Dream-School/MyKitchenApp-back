@@ -34,7 +34,12 @@ This is an example of what should be in the POST body...
 "imageType": "jpg"
 }
 
-
 DELETE "/api/v1/recipes/:id" - deletes recipe from saved list  
+
+PATCH "/api/v1/auth/changePassword" - lets a user change the password stored within our DB to a new PW
+required fields are password (the old one), newPassword (the new one)
+returns a message "password changed" on success
+returns 'please provide password and new password' or 'invalid credentials' on failure
+
 
 
