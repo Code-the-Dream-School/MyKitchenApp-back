@@ -1,5 +1,6 @@
 require('dotenv').config();
 require('express-async-errors');
+const path = require("path")
 const axios = require('axios')
 
 //extra security packages
@@ -70,6 +71,10 @@ app.get('/checkUser', auth,  (req, res) => {
 })
 app.get('/testGoogle', (req, res) => {
   res.render('testGoogle')
+})
+
+app.use((req,res) => {
+  res.sendFile(path.join(__dirname, 'MyKitchenApp-front/build/index.html'))
 })
 
 app.use(notFoundMiddleware);
