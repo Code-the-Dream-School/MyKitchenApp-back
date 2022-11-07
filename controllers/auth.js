@@ -32,11 +32,11 @@ const login = async (req, res) => {
 }
 //function to change PW
 const changePassword = async (req, res) => {  
-  const {email, password, newPassword} = req.body
-  if(!email || !password || !newPassword) {
-    throw new BadRequestError('please provide email, password and new password')
+  const {password, newPassword} = req.body
+  if(!password || !newPassword) {
+    throw new BadRequestError('please provide old password and new password')
   }
-  const user = await User.findOne({email})
+  const user = await User.findById(req.user.userId)
   if(!user) {
     throw new UnauthenticatedError('invalid credentials')
   }
