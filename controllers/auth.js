@@ -31,7 +31,18 @@ const login = async (req, res) => {
 
 }
 
+const removeUser = async (req, res) => { 
+  const {id} = req.params
+  const user = await User.findByIdAndDelete(id)
+  if(!user) {
+    throw new NotFoundError(`no user with id ${id}`)
+  }
+  res.status(StatusCodes.OK).json({message: 'user deleted'})
+}
+
+
 module.exports = {
   register,
   login,
+  removeUser,
 }
