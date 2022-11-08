@@ -12,7 +12,13 @@ GET "/" - check route
 
 GET "/checkUser" - checks if the user is logged in 
 
-POST "/api/v1/auth/register" - registers the user- body contains name, password (minimum 6 characters), email (syntactically valid email)  
+POST "/api/v1/auth/register" - registers the user- body contains name, password (minimum 6 characters), email (syntactically valid email) and returns  
+{
+    "user": {
+        "name": "....."
+    },
+    "token": "..."
+}  
 
 POST "/api/v1/auth/login" - logs user in- body requires email and password  
 
@@ -36,10 +42,19 @@ This is an example of what should be in the POST body...
 
 DELETE "/api/v1/recipes/:id" - deletes recipe from saved list  
 
+GET "localhost:3002/api/v1/recipes" - gets a random recipe. takes in a 
+number 1-100 for how many recipes are returned and also takes in a string
+can be any of these options - diets, meal types, cuisines, or intolerances
+
+
 PATCH "/api/v1/auth/changePassword" - lets a user change the password stored within our DB to a new PW
 required fields are password (the old one), newPassword (the new one)
 returns a message "password changed" on success
 returns 'please provide password and new password' or 'invalid credentials' on failure
+
+GET "/api/v1/recipes/random" - gets a randomly generated recipe. always the same for a given day. Do not put 
+in an option for query.
+
 
 
 
