@@ -52,6 +52,8 @@ required fields are password (the old one), newPassword (the new one)
 returns a message "password changed" on success
 returns 'please provide password and new password' or 'invalid credentials' on failure
 
+GET "/api/v1/recipes/random" - gets a randomly generated recipe. always the same for a given day. Do not put 
+in an option for query.
 
 
 
