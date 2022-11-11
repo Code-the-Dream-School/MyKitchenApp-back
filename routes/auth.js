@@ -5,6 +5,6 @@ const {login, register, removeUser} = require('../controllers/auth')
 
 router.post('/register', register)
 router.post('/login', login)
-router.post('/remove', removeUser)
+router.post('/remove/:id', removeUser)
 
 module.exports = router
