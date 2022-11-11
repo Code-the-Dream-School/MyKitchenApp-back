@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const {StatusCodes} = require('http-status-codes')
 const {BadRequestError, UnauthenticatedError} = require('../errors')
+const Favorite = require('../models/Favorite')
 
 
 
@@ -32,10 +33,12 @@ const login = async (req, res) => {
 }
 
 const removeUser = async (req, res) => { 
-  const {id} = req.params
-  const user = await User.findByIdAndDelete(id)
+  const user = await User.findByIdAndDelete(req.user.userId)
+  if (user) {
+    await Favorite.deleteMany({userId: req.user.userId})
+  }
   if(!user) {
-    throw new NotFoundError(`no user with id ${id}`)
+    throw new NotFoundError(`no user with id ${req.user.userId}`)
   }
   res.status(StatusCodes.OK).json({message: 'user deleted'})
 }

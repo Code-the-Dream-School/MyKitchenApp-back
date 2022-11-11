@@ -47,7 +47,9 @@ GET "/api/v1/recipes" - gets a random recipe. takes in a
 number 1-100 for how many recipes are returned and also takes in a string
 can be any of these options - diets, meal types, cuisines, or intolerances
 
-POST "/api/v1/auth/remove" - removes user from DB. Takes the userId as param
+DELETE "/api/v1/auth/remove" - removes active user from DB.
+
+
 
 
 
