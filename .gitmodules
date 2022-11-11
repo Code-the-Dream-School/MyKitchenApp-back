@@ -2,3 +2,5 @@
 	path = MyKitchenApp-front
 	url = https://github.com/Code-the-Dream-School/MyKitchenApp-front
 	branch = dev
+	ignore = dirty
+	
