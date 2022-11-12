@@ -7,9 +7,13 @@ const apiKey = process.env.apiKey
 const axios = require('axios')
 
 
-const recipeFunc = results => {
+const recipeFunc = async (req, results) => {
+  console.log('results.data...', results.data)
   let ingredients = results.data.extendedIngredients.map(ingredient => ingredient.original)
-  let instructions = results.data.analyzedInstructions[0].steps.map(step => step.step)
+  let instructions = []
+  if(results.data.analyzedInstructions.length > 0) {
+    instructions = results.data.analyzedInstructions[0].steps.map(step => step.step)
+  }
   let favorite = await Favorite.find({userId: req.user.userId, recipeId: results.data.id})
 
   let recipe = {
@@ -41,7 +45,7 @@ const getRecipe = async (req, res) => {
   if (!req.params.id) {
     throw new NotFoundError(`no recipe with id ${req.params.id}`)
   }
-  const recipe = recipeFunc(results)
+  const recipe = await recipeFunc(req, results)
   res.status(StatusCodes.OK).json(recipe)
 }
 
@@ -92,7 +96,7 @@ const getRandomRecipes = async (req, res) => {
     }
     await Random.create({recipeId: results.data.id, title: results.data.title})
   }
-  const recipe = recipeFunc(results);
+  const recipe = recipeFunc(req, results);
   res.status(StatusCodes.OK).json(recipe)
 }
 
