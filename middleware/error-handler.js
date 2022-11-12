@@ -1,4 +1,9 @@
-const { CustomAPIError } = require('../errors')
+const { 
+  CustomAPIError,
+  UnauthenticatedError,
+  NotFoundError,
+  BadRequestError, 
+} = require('../errors/index')
 const { StatusCodes } = require('http-status-codes')
 const errorHandlerMiddleware = (err, req, res, next) => {
 
@@ -11,6 +16,10 @@ let customError = {
   // if (err instanceof CustomAPIError) {
   //   return res.status(err.statusCode).json({ msg: err.message })
   // }
+
+  if (err instanceof UnauthenticatedError || err instanceof NotFoundError || err instanceof BadRequestError) {
+    customError.msg = err.message
+  } else
 
   if (err.name === 'ValidationError') {
     customError.msg = Object.values(err.errors)
