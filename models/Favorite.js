@@ -6,12 +6,12 @@ const mongoose = require('mongoose')
 const FavoriteSchema = new mongoose.Schema({    
 
     recipeId: {
-        type: String,
+        type: Number,
         required: true,
     },  
     userId: { 
 
-        type: String, 
+        type: mongoose.Types.ObjectId, 
         required: true,
     },
     title: {
@@ -22,6 +22,7 @@ const FavoriteSchema = new mongoose.Schema({
         type: String,
             
     },
+
   
   },{timestamps:true})    
   module.exports = mongoose.model('Favorite', FavoriteSchema) 
