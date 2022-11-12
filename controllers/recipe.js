@@ -8,7 +8,6 @@ const axios = require('axios')
 
 
 const recipeFunc = async (req, results) => {
-  console.log('results.data...', results.data)
   let ingredients = results.data.extendedIngredients.map(ingredient => ingredient.original)
   let instructions = []
   if(results.data.analyzedInstructions.length > 0) {
