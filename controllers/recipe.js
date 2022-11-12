@@ -10,7 +10,10 @@ const axios = require('axios')
 const recipeFunc = results => {
   let ingredients = results.data.extendedIngredients.map(ingredient => ingredient.original)
   let instructions = results.data.analyzedInstructions[0].steps.map(step => step.step)
+  let favorite = await Favorite.find({userId: req.user.userId, recipeId: results.data.id})
+
   let recipe = {
+    isFavorite: favorite.length ? true : false,
     id: results.data.id,
     title: results.data.title,
     servings: results.data.servings,
