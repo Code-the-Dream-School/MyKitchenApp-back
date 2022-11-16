@@ -8,7 +8,7 @@ const axios = require('axios')
 
 
 const recipeFunc = async (req, results) => {
-  console.log('results data:', JSON.stringify(results.data.nutrition, null, 2))
+  // console.log('results data:', JSON.stringify(results.data.nutrition, null, 2))
   let nutrition = results.data.nutrition
   let ingredients = results.data.extendedIngredients.map(ingredient => ingredient.original)
   let instructions = []
@@ -30,8 +30,9 @@ const recipeFunc = async (req, results) => {
     instructions: instructions,
     readyInMinutes: results.data.readyInMinutes,
     summary: results.data.summary,
-    creditText: results.data.creditsText,
-    nutrition: nutrition
+    creditText: results.data.creditsText,}
+    if (nutrition) {
+    recipe.nutrition = nutrition;
   }
   return recipe;
 }
