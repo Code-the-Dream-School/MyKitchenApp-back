@@ -34,9 +34,6 @@
   "devDependencies": {
     "nodemon": "^2.0.9"
   },
-  "engines": {
-    "node": "14.x"
-  },
   "author": "",
   "license": "ISC",
   "bugs": {
