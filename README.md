@@ -7,6 +7,12 @@ MONGO_URI
 JWT_SECRET   
 JWT_LIFETIME  
 
+## Front End Submodule
+To access the front-end submodule- 
+  cd into the submodule
+  first command is 'git submodule init' (only for new/first time user)
+  next command is 'git submodule update --remote' on the main route
+  
 ## API so far
 GET "/" - check route  
 

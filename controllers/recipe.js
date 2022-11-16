@@ -8,6 +8,8 @@ const axios = require('axios')
 
 
 const recipeFunc = async (req, results) => {
+  // console.log('results data:', JSON.stringify(results.data.nutrition, null, 2))
+  let nutrition = results.data.nutrition
   let ingredients = results.data.extendedIngredients.map(ingredient => ingredient.original)
   let instructions = []
   if(results.data.analyzedInstructions.length > 0) {
@@ -28,7 +30,9 @@ const recipeFunc = async (req, results) => {
     instructions: instructions,
     readyInMinutes: results.data.readyInMinutes,
     summary: results.data.summary,
-    creditText: results.data.creditsText,
+    creditText: results.data.creditsText,}
+    if (nutrition) {
+    recipe.nutrition = nutrition;
   }
   return recipe;
 }
@@ -40,7 +44,7 @@ const getRecipes = async (req, res) => {
 }
 const getRecipe = async (req, res) => {
   req.query.apiKey = apiKey;
-  const results = await axios.get(`https://api.spoonacular.com/recipes/${req.params.id}/information`, {params: req.query});
+  const results = await axios.get(`https://api.spoonacular.com/recipes/${req.params.id}/information?includeNutrition=true`, {params: req.query});
   if (!req.params.id) {
     throw new NotFoundError(`no recipe with id ${req.params.id}`)
   }
