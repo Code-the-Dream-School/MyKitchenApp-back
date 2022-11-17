@@ -56,7 +56,8 @@ const getRecipe = async (req, res) => {
 const deleteFavorite = async (req, res) => {
   const {id} = req.params
   const {user} = req
-  const favorite = await Favorite.findOneAndDelete({user: user._id, recipeId: id})
+  const favorite = await Favorite.findOneAndDelete({userId: user.userId, recipeId: id})
+  //const favorite = await Favorite.findOneAndDelete({userId: user._id, recipeId: id})
   if(!favorite) { 
     throw new NotFoundError(`no favorite with id ${id}`)  
   } 
