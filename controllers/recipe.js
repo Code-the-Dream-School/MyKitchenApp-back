@@ -22,6 +22,12 @@ const recipeFunc = async (req, results) => {
     id: results.data.id,
     title: results.data.title,
     servings: results.data.servings,
+    healthScore: results.data.healthScore,
+    veryPopular: results.data.veryHealthy,
+    glutenFree: results.data.glutenFree,
+    dairyFree: results.data.dairyFree,
+    vegetarian: results.data.vegetarian,
+    vegan: results.data.vegan,
     diets: results.data.diets,
     cuisines: results.data.cuisines,
     sourceUrl: results.data.sourceUrl,
@@ -52,12 +58,10 @@ const getRecipe = async (req, res) => {
   res.status(StatusCodes.OK).json(recipe)
 }
 
-// check if user: user._id or if user: user.id??.......................
 const deleteFavorite = async (req, res) => {
   const {id} = req.params
   const {user} = req
   const favorite = await Favorite.findOneAndDelete({userId: user.userId, recipeId: id})
-  //const favorite = await Favorite.findOneAndDelete({userId: user._id, recipeId: id})
   if(!favorite) { 
     throw new NotFoundError(`no favorite with id ${id}`)  
   } 
@@ -79,7 +83,6 @@ const saveFavorite = async (req, res) => {
   res.status(StatusCodes.OK).json({message: 'Favorite recipe saved'}) ;
 
 }
-//get random recipe from api route https://api.spoonacular.com/recipes/random
 
 const getRandomRecipes = async (req, res) => { 
   req.query.apiKey = apiKey;
