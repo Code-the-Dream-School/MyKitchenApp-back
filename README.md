@@ -1,3 +1,4 @@
+![alt text](/MyKitchenLogo.png)
 # alpaca-albatross-practicum-team2-back
 
 ## Back End Repository
@@ -10,8 +11,8 @@ JWT_LIFETIME
 ## Front End Submodule
 To access the front-end submodule- 
   cd into the submodule
-  first command is 'git submodule init' (only for new/first time user)
-  next command is 'git submodule update --remote' on the main route
+  first command is 'git submodule init' (only for new/first time user)  
+  next command is to cd into the back end and run 'git submodule update --remote' on the main route
   
 ## API so far
 GET "/" - check route  

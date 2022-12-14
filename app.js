@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss-clean');
 const rateLimiter = require('express-rate-limit');
-const apiKey = process.env.apiKey
+const API_KEY = process.env.API_KEY
 // Swagger
 //const swaggerUI = require('swagger-ui-express');
 //const YAML = require('yamljs');
