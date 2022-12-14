@@ -44,12 +44,12 @@ const recipeFunc = async (req, results) => {
 }
 
 const getRecipes = async (req, res) => {
-  req.query.API_KEY = API_KEY;
+  req.query.apiKey = API_KEY;
   const results = await axios.get("https://api.spoonacular.com/recipes/complexSearch", {params: req.query});
   res.status(StatusCodes.OK).json(results.data)
 }
 const getRecipe = async (req, res) => {
-  req.query.API_KEY = API_KEY;
+  req.query.apiKey = API_KEY;
   const results = await axios.get(`https://api.spoonacular.com/recipes/${req.params.id}/information?includeNutrition=true`, {params: req.query});
   if (!req.params.id) {
     throw new NotFoundError(`no recipe with id ${req.params.id}`)
@@ -85,7 +85,7 @@ const saveFavorite = async (req, res) => {
 }
 
 const getRandomRecipes = async (req, res) => { 
-  req.query.API_KEY = API_KEY;
+  req.query.apiKey = API_KEY;
   const savedRecipe = await Random.findOne();
   let results = null;
   if (savedRecipe) {
