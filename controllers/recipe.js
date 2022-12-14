@@ -3,7 +3,7 @@ const { NotFoundError } = require('../errors')
 const User = require('../models/User')
 const Favorite = require('../models/Favorite')
 const Random = require('../models/Random')
-const apiKey = process.env.apiKey
+const API_KEY = process.env.API_KEY
 const axios = require('axios')
 
 
@@ -44,12 +44,12 @@ const recipeFunc = async (req, results) => {
 }
 
 const getRecipes = async (req, res) => {
-  req.query.apiKey = apiKey;
+  req.query.API_KEY = API_KEY;
   const results = await axios.get("https://api.spoonacular.com/recipes/complexSearch", {params: req.query});
   res.status(StatusCodes.OK).json(results.data)
 }
 const getRecipe = async (req, res) => {
-  req.query.apiKey = apiKey;
+  req.query.API_KEY = API_KEY;
   const results = await axios.get(`https://api.spoonacular.com/recipes/${req.params.id}/information?includeNutrition=true`, {params: req.query});
   if (!req.params.id) {
     throw new NotFoundError(`no recipe with id ${req.params.id}`)
@@ -85,7 +85,7 @@ const saveFavorite = async (req, res) => {
 }
 
 const getRandomRecipes = async (req, res) => { 
-  req.query.apiKey = apiKey;
+  req.query.API_KEY = API_KEY;
   const savedRecipe = await Random.findOne();
   let results = null;
   if (savedRecipe) {
